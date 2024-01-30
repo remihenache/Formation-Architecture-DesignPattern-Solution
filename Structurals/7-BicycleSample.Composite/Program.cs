@@ -1,16 +1,24 @@
-﻿namespace BicycleSample.Composite;
+﻿using BicycleSample.Composite.Components;
 
-// Interface commune pour tous les composants du vélo
-
-// Classe abstraite représentant un composant générique du vélo
-
-// Exemples de composants concrets avec des coûts fixes
+namespace BicycleSample.Composite;
 
 internal class Program
 {
     private static void Main()
     {
-        // Les étudiants doivent ici créer la structure composite du vélo
-        // et intégrer les composants concrets avec leurs coûts fixes.
+        var bike = new Bicycle();
+
+        var handlebar = new HandlebarComposite();
+        handlebar.AddComponent(new Grip());
+        handlebar.AddComponent(new Bell());
+
+        var wheel = new WheelComposite();
+        wheel.AddComponent(new BrakePad());
+
+        bike.AddComponent(handlebar);
+        bike.AddComponent(wheel);
+        bike.AddComponent(new Frame()); // Ajouter le cadre comme composant simple
+
+        bike.DisplayComponentDetails();
     }
 }
